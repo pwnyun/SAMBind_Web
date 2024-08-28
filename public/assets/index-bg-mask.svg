@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="375px" height="238px" viewBox="0 0 375 238" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>头部背景图片</title>
+    <defs>
+        <path d="M0,0 L374.500666,0 L374.500666,119.269385 C310.19615,146.339594 247.779372,159.874698 187.250333,159.874698 C126.721294,159.874698 64.3045162,146.339594 0,119.269385 L0,0 Z" id="path-1"/>
+        <linearGradient x1="25.4750759%" y1="45.6832433%" x2="85.7613111%" y2="57.5234864%" id="linearGradient-3">
+            <stop stop-color="#5D8DFF" stop-opacity="0.804168488" offset="0%"/>
+            <stop stop-color="#052EDB" stop-opacity="0.696050044" offset="100%"/>
+        </linearGradient>
+        <path d="M0,0 L374.500666,0 L374.500666,119.364013 C310.19615,146.454671 247.779372,160 187.250333,160 C126.721294,160 64.3045162,146.454671 0,119.364013 L0,0 Z" id="path-4"/>
+    </defs>
+    <g id="移动端" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="头部背景图片">
+            <path d="M0,114.5 C64.3902555,144.538948 126.890256,159.558422 187.5,159.558422 C248.109744,159.558422 310.609744,144.538948 375,114.5 L375,114.5 L375,237.5 L0,237.5 Z" id="弧形白色遮罩" fill="#FFFFFFff"/>
+            <g id="phone-bg(750*474)">
+                <mask id="mask-2" fill="white">
+                    <use xlink:href="#path-1"/>
+                </mask>
+                <g id="Mask"/>
+            </g>
+            <mask id="mask-5" fill="white">
+                <use xlink:href="#path-4"/>
+            </mask>
+            <use id="顶部蒙版" fill="url(#linearGradient-3)" xlink:href="#path-4"/>
+        </g>
+    </g>
+</svg>

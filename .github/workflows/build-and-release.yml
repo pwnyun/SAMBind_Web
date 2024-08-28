@@ -1,0 +1,51 @@
+name: Build and Release
+
+on:
+  push:
+    branches: [main]  # Replace 'main' with your desired branch
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 20  # Replace with your Node.js version
+      - run: npm install
+      - run: npm run build
+
+      - name: Create Tag
+        run: |
+          TIMESTAMP=$(date +%Y%m%d%H%M%S)
+          git tag v$TIMESTAMP
+          git push origin v$TIMESTAMP
+
+      - name: Archive dist folder
+        run: |
+          tar -czf dist.tar.gz -C dist .
+
+      - name: Create GitHub Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: v${{ github.run_number }}
+          release_name: "Release ${{ github.run_number }}"
+          body: Automatic release created by GitHub Actions
+          draft: false
+          prerelease: false
+
+      - name: Upload Release Asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./dist.tar.gz
+          asset_name: dist.tar.gz
+          asset_content_type: application/gzip

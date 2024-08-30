@@ -6,6 +6,7 @@ import ErrorPage from "./pages/ErrorPage.jsx";
 import CollectionFormForOld from "./pages/CollectionFormForOld.jsx";
 import SAMBind from "./pages/SAMBind.jsx";
 import Goods from "./pages/Goods.jsx";
+import Feedback from "./pages/Feedback.jsx";
 
 const router = createBrowserRouter([
   {
@@ -18,7 +19,10 @@ const router = createBrowserRouter([
   }, {
     path: '/sam-bind',
     element: <SAMBind/>
-  },
+  }, {
+    path: '/feedback',
+    element: <Feedback/>
+  }
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(

@@ -145,8 +145,17 @@ export default function SAMBind() {
           <div className="text-xl underline underline-offset-8 decoration-pink-500 decoration-2 font-medium py-2">
             绑定提示
           </div>
+
           <div className="pt-2">
             本页面仅供移动融套餐用户进行校园网账号绑定，其他用户绑定后将导致无法连接校园网！
+          </div>
+          <div className="py-1 text-center text-gray-400 select-none">·&ensp;·&ensp;·&ensp;·</div>
+          <div className="pb-2">
+            因山东省高校校园网业务平台服务中断，导致我校校园网融合绑定失败，该问题正在反馈处理中，有遇到融合绑定错误的同学，请在开通校园网业务
+            3 小时后再尝试进行融合绑定。<br/>
+            校园网客服微信：qluxyw<br/><b>（咨询人数较多，请耐心等待回复）</b><br/>
+            校园网官方微信公众号：<br/>
+            <b>齐鲁工业大学网络运维</b>
           </div>
         </div>
 

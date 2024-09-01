@@ -9,8 +9,14 @@ export default function SAMBind() {
   const navigate = useNavigate();
   const formRef = useRef(null)
 
-  const [showModal, setShowModal] = useState(false);
-  const [modalContent, setModalContent] = useState('');
+  const [showModal, setShowModal] = useState(true);
+  const [modalContent, setModalContent] = useState(
+    <div>
+      因山东省高校校园网业务平台服务中断，导致我校校园网融合绑定失败，该问题正在反馈处理中，有遇到融合绑定错误的同学，请在开通校园网业务 3 小时后再尝试进行融合绑定。<br/>
+      校园网客服微信：qluxyw（咨询人数较多，请耐心等待回复）<br/>
+      校园网官方微信公众号：齐鲁工业大学网络运维。
+    </div>
+  );
   const [modalButtonText, setModalButtonText] = useState("关闭");
   const [modalOptionalButton, setModalOptionalButton] = useState();
 

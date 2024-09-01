@@ -1,26 +1,27 @@
 import {useRef, useState} from "react";
-import {FaNetworkWired, FaWifi} from "react-icons/fa6";
+import {FaNetworkWired, FaTowerCell, FaWifi} from "react-icons/fa6";
 
 export default function Feedback() {
   const formRef = useRef(null);
   const [agreeContact, setAgreeContact] = useState(false);
   const [questions] = useState([
-    {icon: "wifi", str: "您对无线网络提速的态度？"},
-    {icon: "wifi", str: "在您的宿舍环境，高负载状态下（例如晚上同时下载、更新游戏时），无线网络是否仍然能保持较高速率（网速高于 30MBps，即 4MB/s）？"},
+    {icon: "cell", str: "宿舍内运营商 5G 信号良好？"},
+    {icon: "cell", str: "教学区域运营商 5G 信号良好？"},
+    {icon: "wifi", str: "无线网络提速使我有更好的网络体验？"},
+    {icon: "wifi", str: "在您的宿舍中，高负载状态下（例如晚上同时下载、更新游戏时），无线网络是否仍然能保持较高速率（网速高于 30MBps，即 4MB/s）？"},
     {icon: "wifi", str: "无线校园网连接后，能够自动打开认证网页，并且在很短的时间内完成认证操作？"},
     {icon: "wifi", str: "无线校园网比较稳定，在游戏中很少出现延迟较大波动（波动超过 10ms）的情况？"},
-    {icon: "wire", str: "您对有限网络速度调整的态度？"},
-    {icon: "wire", str: "在您的宿舍环境下，使用有线网络？"},
-    {icon: "wire", str: "在您的宿舍环境下，有线网络日常体验几乎没有变化？"},
-    {icon: "wire", str: "在您的宿舍环境下，有线网络的下载体验几乎没有变化？"},
-    {icon: "wire", str: "有线网络非常稳定，CF、LOL等腾讯系游戏延迟很低（低于 50ms）？"},
+    {icon: "wire", str: "您对有线网络速度调整的态度？"},
+    {icon: "wire", str: "在您的宿舍环境下，使用有线网络的体验是良好的？"},
+    {icon: "wire", str: "在您的宿舍环境下，有线网络接口数量是足够的？"},
+    {icon: "wire", str: "有线网络非常稳定，国内延迟敏感的网络游戏体验较好（低于 50ms）？"},
     {icon: "wire", str: "有线网络连接后，能够自动打开认证网页，并且在很短的时间内完成认证操作？"},
   ]);
-  const [options] = useState(["非常不赞同", "不赞同", "一般", "赞同", "非常赞同", "我不明白这个问题的含义"])
+  const [options] = useState(["非常不赞同", "不赞同", "一般", "赞同", "非常赞同", "我不明白这个问题的含义 / 我不确定"])
 
   const submit = () => {
     let formData = new FormData(formRef.current)
-    formData.set("agree-contact", agreeContact)
+    formData.set("agree-contact", agreeContact.toString())
     console.log('表单', formData)
 
 
@@ -74,8 +75,8 @@ export default function Feedback() {
                       className={`${agreeContact ? 'translate-x-3.5' : 'translate-x-0'} h-4 w-4 transform rounded-full bg-white shadow-sm ring-1 ring-gray-900/5 transition duration-200 ease-in-out`}></span>
               </button>
             </div>
-            <label htmlFor="agree-contact" className="text-sm leading-6 text-gray-600 toggle w-full">
-              我同意工作人员通过手机号、QQ号联系我。
+            <label htmlFor="agree-contact" className="text-sm leading-6 text-gray-800 toggle w-full">
+              在有需要的前提下，工作人员后续可以通过手机号、QQ号联系我。
             </label>
             <input type="text" name="agree-contact" id="agree-contact" hidden/>
           </div>
@@ -109,7 +110,9 @@ export default function Feedback() {
                   {index + 1}、
                   {question.icon === 'wifi'
                     ? <FaWifi className="w-6 h-6 text-teal-600 min-w-6 mr-2"/>
-                    : <FaNetworkWired className="w-6 h-6 text-sky-600 min-w-6 mr-2"/>}
+                    : question.icon === 'cell'
+                      ? <FaTowerCell className="w-6 h-6 text-sky-600 min-w-6 mr-2"/>
+                      : <FaNetworkWired className="w-6 h-6 text-sky-600 min-w-6 mr-2"/>}
                   {question.str}
                 </label>
                 <div className="mt-2.5 grid-cols-5 text-sm">
@@ -129,7 +132,7 @@ export default function Feedback() {
 
           <div className="sm:col-span-2">
             <label htmlFor="q-input"
-                   className="block text-sm font-semibold leading-6 text-gray-900">{questions.length + 1}、【无线网络】如果您遇到校园网无线信号覆盖弱、网速差的地点，请在下面填写，我们将查缺补漏：</label>
+                   className="block text-sm font-semibold leading-6 text-gray-900">{questions.length + 1}、【无线网络】如果您遇到校园网无线信号覆盖弱、网速差的地点，请在下面详细填写，我们将查缺补漏：</label>
             <div className="mt-2.5">
               <textarea name="q-input" id="q-input" rows="4"
                         className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"></textarea>

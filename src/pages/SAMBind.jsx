@@ -75,9 +75,6 @@ export default function SAMBind() {
 
     let error = ''
 
-    if (!studentNumber || isNaN(Number(studentNumber.trim())) || studentNumber.trim().length < 6 || studentNumber.trim().length > 12)
-      error += '请检查输入的学号；'
-
     if (!carrier || carriers.findIndex(item => item === carrier) === -1)
       error += '请选择运营商；'
 

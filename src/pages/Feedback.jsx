@@ -1,30 +1,88 @@
-import {useRef, useState} from "react";
-import {FaNetworkWired, FaTowerCell, FaWifi} from "react-icons/fa6";
+import {useEffect, useRef, useState} from "react";
+import {FaCircleQuestion, FaNetworkWired, FaTowerCell, FaWifi} from "react-icons/fa6";
 
 export default function Feedback() {
   const formRef = useRef(null);
   const [agreeContact, setAgreeContact] = useState(false);
   const [questions] = useState([
-    {icon: "cell", str: "宿舍内运营商 5G 信号良好？"},
-    {icon: "cell", str: "教学区域运营商 5G 信号良好？"},
-    {icon: "wifi", str: "无线网络提速使我有更好的网络体验？"},
-    {icon: "wifi", str: "在您的宿舍中，高负载状态下（例如晚上同时下载、更新游戏时），无线网络是否仍然能保持较高速率（网速高于 30MBps，即 4MB/s）？"},
-    {icon: "wifi", str: "无线校园网连接后，能够自动打开认证网页，并且在很短的时间内完成认证操作？"},
-    {icon: "wifi", str: "无线校园网比较稳定，在游戏中很少出现延迟较大波动（波动超过 10ms）的情况？"},
-    {icon: "wire", str: "您对有线网络速度调整的态度？"},
-    {icon: "wire", str: "在您的宿舍环境下，使用有线网络的体验是良好的？"},
-    {icon: "wire", str: "在您的宿舍环境下，有线网络接口数量是足够的？"},
-    {icon: "wire", str: "有线网络非常稳定，国内延迟敏感的网络游戏体验较好（低于 50ms）？"},
-    {icon: "wire", str: "有线网络连接后，能够自动打开认证网页，并且在很短的时间内完成认证操作？"},
+    {
+      icon: "cell",
+      role: "global",
+      str: "您%role%内运营商 4G/5G 通话情况",
+      options: ["非常好", "基本满意", "信号一般", "信号差"]
+    },
+    {
+      icon: "cell",
+      role: "global",
+      str: "您%role%内运营商 4G/5G 上网情况",
+      options: ["非常好", "基本满意", "信号一般", "信号差"]
+    },
+    {
+      icon: "cell",
+      role: "global",
+      str: "您%role%内上网高峰时间段运营商 4G/5G 上网情况",
+      options: ["非常好", "基本满意", "偶尔卡顿严重", "不清楚"]
+    },
+    {
+      icon: "wire",
+      role: "global",
+      str: "您%role%内校园网有线上网情况",
+      options: ["非常好", "基本满意", "信号一般", "信号差"]
+    },
+    {
+      icon: "wifi",
+      role: "global",
+      str: "您%role%内校园网无线上网情况",
+      options: ["非常好", "基本满意", "信号一般", "信号差"]
+    },
+    {
+      icon: "wire",
+      role: "global",
+      str: "您%role%内有线网络接口数量是否足够？",
+      options: ["足够", "不足", "自己增加了转接设备"]
+    },
+    {
+      icon: "wifi",
+      role: "global",
+      str: "无线校园网连接后，能够自动打开认证网页，并且在很短的时间内完成认证操作？",
+      options: ["一直可以", "偶尔不行", "一直不行，需要手动打开网页认证"]
+    },
+    {
+      icon: "    ",
+      role: "student",
+      str: "您没有办理校园网套餐的原因？",
+      options: ["（我办理了，跳过问题）", "不需要，流量够用", "校园网速度慢", "校园网延迟高", "校园网收费高"]
+    },
+    {
+      icon: "    ",
+      role: "student",
+      str: "您是否有办理校园网套餐的意愿？",
+      options: ["（我办理了，跳过问题）", "校园网提速后考虑", "不考虑"]
+    },
+    {
+      icon: "wifi",
+      role: "student",
+      str: "在您的宿舍中，高负载状态下（例如整个宿舍连接校园网且同时下载大文件、同时更新游戏等场景），无线网络是否仍然能保持较高速率（网速高于 30MBps，即 4MB/s）？",
+      options: ["能", "偶尔不能", "不能", "不清楚"]
+    },
+    {
+      icon: "wifi",
+      role: "student",
+      str: "无线校园网比较稳定，在游戏中很少出现延迟较大波动（波动超过 10ms）的情况？",
+      options: ["没有较大波动", "偶尔波动", "波动明显", "不清楚"]
+    },
   ]);
-  const [options] = useState(["非常不赞同", "不赞同", "一般", "赞同", "非常赞同", "我不明白这个问题的含义 / 我不确定"])
+  const [role, setRole] = useState("teacher");
+  const [count, setCount] = useState(0)
+
+  useEffect(() => {
+    setCount(questions.filter(question => question.role === "global" || question.role === role).length);
+  }, [role])
 
   const submit = () => {
     let formData = new FormData(formRef.current)
     formData.set("agree-contact", agreeContact.toString())
     console.log('表单', formData)
-
-
   }
 
   return (<>
@@ -36,7 +94,7 @@ export default function Feedback() {
       </div>
       <div className="mx-auto max-w-2xl">
         <h2 className="pb-8 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl text-center">
-          长清校区校园网升级意见反馈表
+          长清校区网络意见反馈表
         </h2>
         {/*<p className="mt-2 text-lg leading-8 text-gray-600 indent-8">*/}
         {/*  10月26日，网络信息中心对彩石校园网进行了改造工作，通过中国移动线路出口，解决了曾经的卡顿问题。*/}
@@ -48,20 +106,89 @@ export default function Feedback() {
       <form id="form" className="mx-auto mt-16 max-w-xl sm:mt-20" onSubmit={(e) => e.preventDefault()} ref={formRef}>
         <div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
 
-          <div>
-            <label htmlFor="phone-number"
-                   className="block text-sm font-semibold leading-6 text-gray-900">手机号</label>
+          <div className="sm:col-span-2">
+            <label htmlFor={`q-role`}
+                   className="text-sm font-semibold leading-6 text-gray-900 ">
+              <span>1、</span>
+              <FaCircleQuestion className="w-6 h-6 text-sky-600 min-w-6 mr-2 inline"/>
+              <span>您的身份？</span>
+            </label>
+            <div className="mt-2.5 grid-cols-5 text-sm">
+              <div className="col-span-1 flex items-center gap-x-2">
+                <input type="radio" name={`q-role`} id={`q-role-teacher`} onChange={() => setRole("teacher")}
+                       checked={role === "teacher"} value="teacher"/>
+                <label htmlFor={`q-role-teacher`}
+                       className="w-full h-8 flex items-center">教职工</label>
+              </div>
+              <div className="col-span-1 flex items-center gap-x-2">
+                <input type="radio" name={`q-role`} id={`q-role-student`} onChange={() => setRole("student")}
+                       checked={role === "student"} value="student"/>
+                <label htmlFor={`q-role-student`}
+                       className="w-full h-8 flex items-center">学生</label>
+              </div>
+            </div>
+          </div>
+
+          {questions.map((question, index) => {
+            let isShow = question.role === "global" ? true : question.role === role;
+
+            if (isShow)
+              return (
+                <div className="sm:col-span-2" key={`q-${index}`}>
+                  <label htmlFor={`q-${index}`}
+                         className="text-sm font-semibold leading-6 text-gray-900 ">
+                    <span>{index + 2}、</span>
+                    {question.icon === 'wifi'
+                      ? <FaWifi className="w-6 h-6 text-teal-600 min-w-6 mr-2 inline"/>
+                      : question.icon === 'cell'
+                        ? <FaTowerCell className="w-6 h-6 text-sky-600 min-w-6 mr-2 inline"/>
+                        : question.icon === 'wire'
+                          ? <FaNetworkWired className="w-6 h-6 text-sky-600 min-w-6 mr-2 inline"/>
+                          : <FaCircleQuestion className="w-6 h-6 text-sky-600 min-w-6 mr-2 inline"/>
+                    }
+                    <span>{question.str.replaceAll("%role%", role === "teacher" ? "办公室" : "宿舍")}</span>
+                  </label>
+                  <div className="mt-2.5 grid-cols-5 text-sm">
+                    {question.options.map((option, optionIndex) => {
+                      return (
+                        <div className="col-span-1 flex items-center gap-x-2" key={`q-${index}-${optionIndex}`}>
+                          <input type="radio" name={`q-${index}`} id={`q-${index}-${optionIndex}`}/>
+                          <label htmlFor={`q-${index}-${optionIndex}`}
+                                 className="w-full h-8 flex items-center">{option}</label>
+                        </div>
+                      )
+                    })}
+                  </div>
+                </div>
+              )
+          })}
+
+          <div className="sm:col-span-2">
+            <label htmlFor="q-location"
+                   className="block text-sm font-semibold leading-6 text-gray-900">
+              <span>{count + 2}、</span>
+              <FaCircleQuestion className="w-6 h-6 text-sky-600 min-w-6 mr-2 inline"/>
+              <span>{role === "teacher" ? "办公室" : "宿舍"}具体位置（宿舍楼号、楼层）</span>
+            </label>
+            <div className="text-gray-600 text-sm">
+              * 为方便实地勘察，请留下您的<b>**具体**</b>位置，包含楼宇名称、楼层、房间号。
+            </div>
             <div className="mt-2.5">
-              <input type="text" name="phone-number" id="phone-number" autoComplete="tel"
+              <input type="text" name="q-location" id="q-location" placeholder="例如，机电楼B座666房间"
                      className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"/>
             </div>
           </div>
 
-          <div>
-            <label htmlFor="qq-number" className="block text-sm font-semibold leading-6 text-gray-900">QQ号</label>
+          <div className="sm:col-span-2">
+            <label htmlFor="q-other-place"
+                   className="block text-sm font-semibold leading-6 text-gray-900">
+              <span>{questions.length + 3}、</span>
+              <FaWifi className="w-6 h-6 text-teal-600 min-w-6 mr-2 inline"/>
+              <span>另有其他区域网络需要反馈，请在下方填写：</span>
+            </label>
             <div className="mt-2.5">
-              <input type="text" name="qq-number" id="qq-number" autoComplete="off"
-                     className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"/>
+              <textarea name="q-other-place" id="q-other-place" rows="4" placeholder="请填写具体位置和问题"
+                        className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"></textarea>
             </div>
           </div>
 
@@ -81,61 +208,20 @@ export default function Feedback() {
             <input type="text" name="agree-contact" id="agree-contact" hidden/>
           </div>
 
-          <div className="sm:col-span-2">
-            <label htmlFor="info"
-                   className="block text-sm font-semibold leading-6 text-gray-900">姓名、学/工号（选填）</label>
+          <div className={agreeContact ? 'block' : 'hidden'}>
+            <label htmlFor="phone-number"
+                   className="block text-sm font-semibold leading-6 text-gray-900">手机号</label>
             <div className="mt-2.5">
-              <input type="text" name="info" id="info" autoComplete="given-name"
+              <input type="text" name="phone-number" id="phone-number" autoComplete="tel"
                      className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"/>
             </div>
           </div>
 
-          <div className="sm:col-span-2">
-            <label htmlFor="info-2"
-                   className="block text-sm font-semibold leading-6 text-gray-900">宿舍楼号、楼层（选填）</label>
-            <div className="text-gray-600 text-sm">
-              * 我们结合下面问题综合研判楼层网络设备状况，以确定下一步是否继续升级设备。
-            </div>
+          <div className={agreeContact ? 'block' : 'hidden'}>
+            <label htmlFor="qq-number" className="block text-sm font-semibold leading-6 text-gray-900">QQ号</label>
             <div className="mt-2.5">
-              <input type="text" name="info-2" id="info-2" autoComplete="given-name"
+              <input type="text" name="qq-number" id="qq-number" autoComplete="off"
                      className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"/>
-            </div>
-          </div>
-
-          {questions.map((question, index) => {
-            return (
-              <div className="sm:col-span-2" key={`q-${index}`}>
-                <label htmlFor={`q-${index}`}
-                       className="text-sm font-semibold leading-6 text-gray-900 flex items-center">
-                  {index + 1}、
-                  {question.icon === 'wifi'
-                    ? <FaWifi className="w-6 h-6 text-teal-600 min-w-6 mr-2"/>
-                    : question.icon === 'cell'
-                      ? <FaTowerCell className="w-6 h-6 text-sky-600 min-w-6 mr-2"/>
-                      : <FaNetworkWired className="w-6 h-6 text-sky-600 min-w-6 mr-2"/>}
-                  {question.str}
-                </label>
-                <div className="mt-2.5 grid-cols-5 text-sm">
-                  {options.map((option, optionIndex) => {
-                    return (
-                      <div className="col-span-1 flex items-center gap-x-2" key={`q-${index}-${optionIndex}`}>
-                        <input type="radio" name={`q-${index}`} id={`q-${index}-${optionIndex}`}/>
-                        <label htmlFor={`q-${index}-${optionIndex}`}
-                               className="w-full h-8 flex items-center">{option}</label>
-                      </div>
-                    )
-                  })}
-                </div>
-              </div>
-            )
-          })}
-
-          <div className="sm:col-span-2">
-            <label htmlFor="q-input"
-                   className="block text-sm font-semibold leading-6 text-gray-900">{questions.length + 1}、【无线网络】如果您遇到校园网无线信号覆盖弱、网速差的地点，请在下面详细填写，我们将查缺补漏：</label>
-            <div className="mt-2.5">
-              <textarea name="q-input" id="q-input" rows="4"
-                        className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"></textarea>
             </div>
           </div>
 

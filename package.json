@@ -10,8 +10,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@headlessui/react": "^2.1.2",
-    "axios": "^1.7.2",
+    "@headlessui/react": "^2.1.6",
+    "axios": "^1.7.7",
     "crypto-js": "^4.2.0",
     "gb3304": "^1.0.1",
     "localforage": "^1.10.0",
@@ -19,24 +19,24 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-dropzone": "^14.2.3",
-    "react-icons": "^5.2.1",
-    "react-router-dom": "^6.25.1",
+    "react-icons": "^5.3.0",
+    "react-router-dom": "^6.26.2",
     "use-immer": "^0.10.0"
   },
   "devDependencies": {
-    "@province-city-china/level": "^8.5.7",
+    "@province-city-china/level": "^8.5.8",
     "@small-tech/vite-plugin-sri": "^1.0.1",
-    "@tailwindcss/forms": "^0.5.7",
-    "@types/react": "^18.3.3",
+    "@tailwindcss/forms": "^0.5.9",
+    "@types/react": "^18.3.5",
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react": "^4.3.1",
-    "autoprefixer": "^10.4.19",
+    "autoprefixer": "^10.4.20",
     "eslint": "^8.57.0",
-    "eslint-plugin-react": "^7.34.3",
+    "eslint-plugin-react": "^7.35.2",
     "eslint-plugin-react-hooks": "^4.6.2",
-    "eslint-plugin-react-refresh": "^0.4.7",
-    "postcss": "^8.4.40",
-    "tailwindcss": "^3.4.7",
-    "vite": "^5.3.4"
+    "eslint-plugin-react-refresh": "^0.4.11",
+    "postcss": "^8.4.45",
+    "tailwindcss": "^3.4.10",
+    "vite": "^5.4.3"
   }
 }

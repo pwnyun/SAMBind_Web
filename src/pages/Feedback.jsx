@@ -71,6 +71,12 @@ export default function Feedback() {
       str: "无线校园网比较稳定，在游戏中很少出现延迟较大波动（波动超过 10ms）的情况？",
       options: ["没有较大波动", "偶尔波动", "波动明显", "不清楚"]
     },
+    {
+      icon: "cell",
+      role: "global",
+      str: "您手机卡使用的运营商？",
+      options: ["移动", "联通", "电信", "广电"]
+    }
   ]);
   const [role, setRole] = useState("teacher");
   const [count, setCount] = useState(0)
@@ -182,7 +188,7 @@ export default function Feedback() {
           <div className="sm:col-span-2">
             <label htmlFor="q-other-place"
                    className="block text-sm font-semibold leading-6 text-gray-900">
-              <span>{questions.length + 3}、</span>
+              <span>{count + 3}、</span>
               <FaWifi className="w-6 h-6 text-teal-600 min-w-6 mr-2 inline"/>
               <span>另有其他区域网络需要反馈，请在下方填写：</span>
             </label>

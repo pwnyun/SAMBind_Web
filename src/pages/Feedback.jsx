@@ -1,5 +1,9 @@
 import {useEffect, useRef, useState} from "react";
 import {FaCircleQuestion, FaNetworkWired, FaTowerCell, FaWifi} from "react-icons/fa6";
+import {request} from "../utils.js";
+import {useVisitorData} from "@fingerprintjs/fingerprintjs-pro-react";
+import FingerprintJS from '@fingerprintjs/fingerprintjs'
+import localforage from "localforage";
 
 export default function Feedback() {
   const formRef = useRef(null);
@@ -80,15 +84,81 @@ export default function Feedback() {
   ]);
   const [role, setRole] = useState("teacher");
   const [count, setCount] = useState(0)
+  const [fpBasic, setFpBasic] = useState("");
+  const [fpPro, setFpPro] = useState("");
+
+  // fp basic
+  const fpPromise = FingerprintJS.load()
+
+  // fp pro
+  const {isLoading, error, data, getData} = useVisitorData(
+    {extendedResult: true},
+    {immediate: true}
+  )
+
+  // get fp
+  useEffect(() => {
+    async function fn() {
+      console.log(isLoading, error, data, getData)
+      try {
+        const fpProData = await getData()
+        setFpPro(fpProData)
+      } catch {
+        setFpPro("ERROR")
+      }
+
+      try {
+        const fpBasic = await fpPromise
+        const result = await fpBasic.get()
+        console.log("fpBasic", result.visitorId)
+        setFpBasic(result.visitorId)
+      } catch {
+        setFpBasic("ERROR")
+      }
+    }
+
+    fn()
+  }, []);
+
+  useEffect(() => {
+    localforage.getItem("202409_campus_network").then(res => {
+      if (res === "feedback_success") {
+        alert('请勿重复提交')
+        window.close()
+      }
+    })
+  }, []);
 
   useEffect(() => {
     setCount(questions.filter(question => question.role === "global" || question.role === role).length);
   }, [role])
 
-  const submit = () => {
+  const submit = async () => {
     let formData = new FormData(formRef.current)
     formData.set("agree-contact", agreeContact.toString())
+    formData.set("fp", JSON.stringify([fpBasic, fpPro]))
+    // console.log(fpBasic, fpPro)
     console.log('表单', formData)
+
+    if (await localforage.getItem("202409_campus_network") === "feedback_success") {
+      alert('请勿重复提交')
+      window.close()
+    }
+
+    request({
+      url: '/api/submit-feedback',
+      method: 'POST',
+      data: formData,
+    }).then(res => {
+      console.log(res)
+      if (res.status === 'success') {
+        localforage.setItem("202409_campus_network", "feedback_success")
+        alert("提交成功，我们已收到您的反馈，请关闭该页面。")
+        window.close()
+      } else {
+        alert(res.message)
+      }
+    })
   }
 
   return (<>

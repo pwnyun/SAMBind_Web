@@ -10,6 +10,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@fingerprintjs/fingerprintjs": "^4.5.0",
+    "@fingerprintjs/fingerprintjs-pro": "^3.11.1",
+    "@fingerprintjs/fingerprintjs-pro-react": "^2.6.3",
     "@headlessui/react": "^2.1.6",
     "axios": "^1.7.7",
     "crypto-js": "^4.2.0",

@@ -8,6 +8,15 @@ importers:
 
   .:
     dependencies:
+      '@fingerprintjs/fingerprintjs':
+        specifier: ^4.5.0
+        version: 4.5.0
+      '@fingerprintjs/fingerprintjs-pro':
+        specifier: ^3.11.1
+        version: 3.11.1
+      '@fingerprintjs/fingerprintjs-pro-react':
+        specifier: ^2.6.3
+        version: 2.6.3
       '@headlessui/react':
         specifier: ^2.1.6
         version: 2.1.6(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -340,6 +349,18 @@ packages:
   '@eslint/js@8.57.0':
     resolution: {integrity: sha512-Ys+3g2TaW7gADOJzPt83SJtCDhMjndcDMFVQ/Tj9iA1BfJzFKD9mAUXT3OenpuPHbI6P/myECxRJrofUsDx/5g==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
+
+  '@fingerprintjs/fingerprintjs-pro-react@2.6.3':
+    resolution: {integrity: sha512-/axCq/cfjZkIM+WFZM/05FQvqtNfdKbIFKU6b2yrwPKlgT8BqWkAq8XvFX6JCPlq8/udVLJjFEDCK+1JQh1L6g==}
+
+  '@fingerprintjs/fingerprintjs-pro-spa@1.3.2':
+    resolution: {integrity: sha512-s1YGsx1XQLmjU+av4UrUHNxyzwPHyZRB0GXJQFOJK8ZHCYc2SNukxnJmZA++bNBa8twU3wW+QgSJhA4Prjnd0g==}
+
+  '@fingerprintjs/fingerprintjs-pro@3.11.1':
+    resolution: {integrity: sha512-qksDl/+N4JI3Vaj511RDGuOx/LEMHmFfhwSs4oGxyodsDhZ8PVz/dbXvayufw5JJLtIsFBhGrnoMMarDI5zT1w==}
+
+  '@fingerprintjs/fingerprintjs@4.5.0':
+    resolution: {integrity: sha512-mFSQoxyt8SGGRp1QUlhcnVtquW2HzCKfHKxAoIurR6soIJpuK3VvZuH0sg8eNaHH2dJhI3mZOEUx4k+P4GqXzw==}
 
   '@floating-ui/core@1.6.7':
     resolution: {integrity: sha512-yDzVT/Lm101nQ5TCVeK65LtdN7Tj4Qpr9RTXJ2vPFLqtLxwOrpoxAHAJI8J3yYWUc40J0BDBheaitK5SJmno2g==}
@@ -2184,6 +2205,24 @@ snapshots:
       - supports-color
 
   '@eslint/js@8.57.0': {}
+
+  '@fingerprintjs/fingerprintjs-pro-react@2.6.3':
+    dependencies:
+      '@fingerprintjs/fingerprintjs-pro-spa': 1.3.2
+      fast-deep-equal: 3.1.3
+
+  '@fingerprintjs/fingerprintjs-pro-spa@1.3.2':
+    dependencies:
+      '@fingerprintjs/fingerprintjs-pro': 3.11.1
+      tslib: 2.7.0
+
+  '@fingerprintjs/fingerprintjs-pro@3.11.1':
+    dependencies:
+      tslib: 2.7.0
+
+  '@fingerprintjs/fingerprintjs@4.5.0':
+    dependencies:
+      tslib: 2.7.0
 
   '@floating-ui/core@1.6.7':
     dependencies:

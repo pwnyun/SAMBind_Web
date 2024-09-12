@@ -8,10 +8,12 @@ import SAMBind from "./pages/SAMBind.jsx";
 import Goods from "./pages/Goods.jsx";
 import Feedback from "./pages/Feedback.jsx";
 
+import {FpjsProvider} from '@fingerprintjs/fingerprintjs-pro-react'
+
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <CollectionFormForOld />,
+    element: <CollectionFormForOld/>,
     errorElement: <ErrorPage/>
   }, {
     path: '/goods',
@@ -27,6 +29,13 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <RouterProvider router={router}/>
+    <FpjsProvider
+      loadOptions={{
+        apiKey: "8Zketj5Hyu4Gxrn2SLQn",
+        region: "ap"
+      }}
+    >
+      <RouterProvider router={router}/>
+    </FpjsProvider>
   </React.StrictMode>
 )

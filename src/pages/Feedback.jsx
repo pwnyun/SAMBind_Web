@@ -12,6 +12,12 @@ export default function Feedback() {
     {
       icon: "cell",
       role: "global",
+      str: "您手机卡使用的运营商？",
+      options: ["移动", "联通", "电信", "广电"]
+    },
+    {
+      icon: "cell",
+      role: "global",
       str: "您%role%内运营商 4G/5G 通话情况",
       options: ["非常好", "基本满意", "信号一般", "信号差"]
     },
@@ -74,12 +80,6 @@ export default function Feedback() {
       role: "student",
       str: "无线校园网比较稳定，在游戏中很少出现延迟较大波动（波动超过 10ms）的情况？",
       options: ["没有较大波动", "偶尔波动", "波动明显", "不清楚"]
-    },
-    {
-      icon: "cell",
-      role: "global",
-      str: "您手机卡使用的运营商？",
-      options: ["移动", "联通", "电信", "广电"]
     }
   ]);
   const [role, setRole] = useState("teacher");
@@ -219,7 +219,7 @@ export default function Feedback() {
                       : question.icon === 'cell'
                         ? <FaTowerCell className="w-6 h-6 text-sky-600 min-w-6 mr-2 inline"/>
                         : question.icon === 'wire'
-                          ? <FaNetworkWired className="w-6 h-6 text-sky-600 min-w-6 mr-2 inline"/>
+                          ? <FaNetworkWired className="w-6 h-6 text-rose-400 min-w-6 mr-2 inline"/>
                           : <FaCircleQuestion className="w-6 h-6 text-sky-600 min-w-6 mr-2 inline"/>
                     }
                     <span>{question.str.replaceAll("%role%", role === "teacher" ? "办公室" : "宿舍")}</span>
@@ -228,7 +228,7 @@ export default function Feedback() {
                     {question.options.map((option, optionIndex) => {
                       return (
                         <div className="col-span-1 flex items-center gap-x-2" key={`q-${index}-${optionIndex}`}>
-                          <input type="radio" name={`q-${index}`} id={`q-${index}-${optionIndex}`}/>
+                          <input type="radio" name={`q-${index}`} id={`q-${index}-${optionIndex}`} value={option}/>
                           <label htmlFor={`q-${index}-${optionIndex}`}
                                  className="w-full h-8 flex items-center">{option}</label>
                         </div>
@@ -259,7 +259,7 @@ export default function Feedback() {
             <label htmlFor="q-other-place"
                    className="block text-sm font-semibold leading-6 text-gray-900">
               <span>{count + 3}、</span>
-              <FaWifi className="w-6 h-6 text-teal-600 min-w-6 mr-2 inline"/>
+              <FaCircleQuestion className="w-6 h-6 text-teal-600 min-w-6 mr-2 inline"/>
               <span>另有其他区域网络需要反馈，请在下方填写：</span>
             </label>
             <div className="mt-2.5">

@@ -35,7 +35,8 @@ export default function SAMBind() {
     let studentNumber = formData.get('student_id');
     let phone = formData.get('phone_number')
 
-    if (!studentNumber || isNaN(Number(studentNumber.trim())) || studentNumber.trim().length < 6 || studentNumber.trim().length > 12) {
+    // if (!studentNumber || isNaN(Number(studentNumber.trim())) || studentNumber.trim().length < 6 || studentNumber.trim().length > 12) {
+    if (!studentNumber)
       setShowModal(true)
       setModalContent('请先输入学/工号。')
       return

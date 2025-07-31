@@ -5,9 +5,16 @@
 
 ---
 
+endpoints:
+
+```text
+/sam-bind   融合绑定
+```
+
+removed endpoints (components are retained):
+
 ```text
 /           校园卡申请表
 /goods      套餐购买
-/sam-bind   融合绑定
 /feedback   意见收集表
 ```

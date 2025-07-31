@@ -113,3 +113,7 @@ export async function getLoginInfo() {
     return {status: false, message: "检查身份核验状态失败，请尝试重新进行身份核验。"}
   }
 }
+
+export function formDataToJson(formData) {
+  return Object.fromEntries(formData.entries());
+}

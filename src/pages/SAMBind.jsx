@@ -1,9 +1,9 @@
 import {useEffect, useRef, useState} from "react";
-import {request} from "../utils.js";
+import { formDataToJson, request } from '../utils.js'
 import {useNavigate} from "react-router-dom";
 import Modal from "../modal.jsx";
 
-const carriers = ['济南移动']
+const carriers = [{name: '济南移动', carrier: 'CMCC'}, {name: '济南联通', carrier: 'CU'}];
 
 export default function SAMBind() {
   const navigate = useNavigate();
@@ -52,9 +52,9 @@ export default function SAMBind() {
     formData.delete('code')
 
     request({
-      url: '/api/send_code',
+      url: 'https://sambind-api.qlu.pwnyun.com/api/send_code',
       method: 'POST',
-      data: formData
+      data: {phone_number: phone}
     }).then(res => {
       if (res.status !== 'success') {
         setShowModal(true)
@@ -76,13 +76,13 @@ export default function SAMBind() {
 
     let error = ''
 
-    if (!carrier || carriers.findIndex(item => item === carrier) === -1)
+    if (!carrier || carriers.findIndex(item => item.carrier === carrier) === -1)
       error += '请选择运营商；'
 
     if (!phone || isNaN(Number(phone.trim())) || phone.trim().length !== 11 || !phone.trim().startsWith('1'))
       error += '输入的手机号码无效；'
 
-    if (!code || isNaN(Number(code.trim())) || code.trim().length !== 4)
+    if (!code || isNaN(Number(code.trim())) || (code.trim().length !== 4 && code.trim().length !== 8))
       error += '输入的验证码格式无效；'
 
     if (error) {
@@ -92,9 +92,9 @@ export default function SAMBind() {
     }
 
     request({
-      url: '/api/bind',
+      url: 'https://sambind-api.qlu.pwnyun.com/api/bind',
       method: 'POST',
-      data: formData
+      data: formDataToJson(formData),
     }).then(res => {
       setShowModal(true)
       setModalContent(res.message);
@@ -138,8 +138,8 @@ export default function SAMBind() {
             绑定提示
           </div>
 
-          <div className="pt-2">
-            本页面仅供济南移动校园卡用户进行校园网融合绑定，其他用户绑定后将导致无法连接校园网！
+          <div className="pt-2 indent-8">
+            办理带校园网的校园卡套餐后，需要将手机卡号和学号绑定，才能使用办理的校园网套餐。目前仅限济南移动和济南联通校园手机卡绑定。电信校园卡请联系校内营业厅工作人员。
           </div>
           <div className="py-1 text-center text-gray-400 select-none">·&ensp;·&ensp;·&ensp;·</div>
           <div className="pb-2">
@@ -183,7 +183,7 @@ export default function SAMBind() {
                     className="block w-full rounded-md border-0 py-1.5 shadow-sm bg-white/20 ring-1 ring-inset ring-gray-300  focus:ring-2 focus:ring-inset focus:ring-indigo-600 text-sm sm:leading-6"
                   >
                     <option value="" disabled hidden></option>
-                    {carriers.map(item => <option key={item}>{item}</option>)}
+                    {carriers.map(item => <option key={item.carrier} value={item.carrier}>{item.name}</option>)}
                   </select>
                 </div>
               </div>

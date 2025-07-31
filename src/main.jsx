@@ -6,7 +6,7 @@ import SAMBind from './pages/SAMBind.jsx'
 
 const router = createBrowserRouter([
   {
-    path: '/sam-bind',
+    path: '/',
     element: <SAMBind/>,
   },
 ])

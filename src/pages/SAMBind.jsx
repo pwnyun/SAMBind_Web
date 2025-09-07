@@ -158,10 +158,8 @@ export default function SAMBind() {
           </div>
           <div className="py-1 text-center text-gray-400 select-none">·&ensp;·&ensp;·&ensp;·</div>
           <div className="pb-2">
-            校园网客服微信：qluxyw2<br/>
-            <b>（咨询人数较多，请耐心等待回复）</b><br/>
-            校园网官方微信公众号：<br/>
-            <b>齐鲁工业大学网络运维</b>
+            其他问题可加 QQ 群咨询：<b>717028060</b><br/>
+            微信公众号：<b>齐鲁工业大学网络运维</b>
           </div>
         </div>
 
@@ -260,10 +258,10 @@ export default function SAMBind() {
       </div>
 
       <div
-        className="w-full sticky bottom-0 bg-white/50 backdrop-blur mt-16 py-4 flex flex-col justify-center items-center text-sm text-gray-600 bg-white">
-        <div className="mb-1">&copy;2024 齐鲁工业大学 | 网络信息中心</div>
+        className="w-full sticky bottom-0 bg-white/50 backdrop-blur mt-16 pt-4 pb-2 flex flex-col justify-center items-center text-sm text-gray-600 bg-white">
         <div className="leading-4">故障上报：关注“齐鲁工业大学网络运维”微信公众号</div>
         <div className="leading-4">选择“网络运维”-“网络报修”</div>
+        <div className="mt-1">&copy;{(new Date()).getFullYear()} 山东鹏云信息科技有限公司 | 鲁ICP备2024087539号 | 增值电信业务许可证 鲁B2-20250166</div>
       </div>
 
       <Modal isOpen={showModal} setIsOpen={setShowModal} buttonText={modalButtonText}

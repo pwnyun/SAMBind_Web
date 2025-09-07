@@ -1,0 +1,3 @@
+onlyBuiltDependencies:
+  - '@fingerprintjs/fingerprintjs-pro-react'
+  - esbuild

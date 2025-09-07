@@ -66,7 +66,7 @@ export function request({url, method, data, params, headers}) {
       },
     );
 
-    axios({method, url, data, params, headers})
+    axios({method, url, data, params, headers, withCredentials: true})
       .then(res => {
         if (!res.status || (res.status && res.status === 'fail')) {
           reject(res.data);

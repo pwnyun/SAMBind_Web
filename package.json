@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@fingerprintjs/fingerprintjs": "^4.6.2",
-    "@fingerprintjs/fingerprintjs-pro": "^3.11.13",
+    "@fingerprintjs/fingerprintjs-pro": "^3.12.0",
     "@fingerprintjs/fingerprintjs-pro-react": "^2.7.0",
     "@headlessui/react": "^2.2.7",
     "axios": "^1.11.0",
@@ -30,7 +30,7 @@
     "@province-city-china/level": "^8.5.8",
     "@small-tech/vite-plugin-sri": "^1.0.1",
     "@tailwindcss/forms": "^0.5.10",
-    "@types/react": "^18.3.23",
+    "@types/react": "^18.3.24",
     "@types/react-dom": "^18.3.7",
     "@vitejs/plugin-react": "^4.7.0",
     "autoprefixer": "^10.4.21",

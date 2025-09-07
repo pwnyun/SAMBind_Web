@@ -143,8 +143,10 @@ export default function SAMBind() {
           </div>
           <div className="py-1 text-center text-gray-400 select-none">·&ensp;·&ensp;·&ensp;·</div>
           <div className="pb-2">
-            校园网报修链接：<b><a href="https://bx.pwnyun.com/">点我报修</a></b><br/>
-            校园网官方微信公众号：<b>齐鲁工业大学网络运维</b>（仅提供报修/融合绑定等功能，无在线客服）
+            校园网客服微信：qluxyw2<br/>
+            <b>（咨询人数较多，请耐心等待回复）</b><br/>
+            校园网官方微信公众号：<br/>
+            <b>齐鲁工业大学网络运维</b>
           </div>
         </div>
 

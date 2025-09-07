@@ -98,15 +98,17 @@ export default function SAMBind() {
     }).then(res => {
       let message = typeof res.message === "string" ? res.message.trim() : res.message.toString().trim();
       if (message === "30001") {
-        message = "[30001] 用户名或用户绑定信息不存在。"
-      } else if (message === "30002") {
-        message = "[30002] 要绑定的号码已被其他学号绑定。"
-      } else if (message === "30003") {
-        message = "[30003] 用户已经绑定了该运营商的账号，无需重复绑定。"
-      } else if (message === "30005") {
-        message = "[30005] 运营商账号不符合规范。"
-      } else if (message === "30008") {
-        message = "[30008] 周期内运营商账号绑定已经超出了最大绑定次数。"
+        message = "[30001] 用户名不存在。"
+      } else if (message === "30031") {
+        message = "[30031] 用户绑定信息不存在。"
+      } else if (message === "31002") {
+        message = "[31002] 要绑定的号码已被其他学号绑定。"
+      } else if (message === "31003") {
+        message = "[31003] 用户已经绑定了该运营商的账号，无需重复绑定。"
+      } else if (message === "31005") {
+        message = "[31005] 运营商账号不符合规范。"
+      } else if (message === "31008") {
+        message = "[31008] 周期内运营商账号绑定已经超出了最大绑定次数。"
       }
 
       setShowModal(true)

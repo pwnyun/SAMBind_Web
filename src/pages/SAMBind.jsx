@@ -69,12 +69,15 @@ export default function SAMBind() {
   const submit = () => {
     let formData = new FormData(formRef.current);
     console.debug(formData)
-    let studentNumber = formData.get('student_id');
+    let name = formData.get('student_name');
     let carrier = formData.get('carrier');
     let phone = formData.get('phone_number')
     let code = formData.get('code');
 
     let error = ''
+
+    if (!name || name.trim().length < 2)
+      error += '请输入姓名；'
 
     if (!carrier || carriers.findIndex(item => item.carrier === carrier) === -1)
       error += '请选择运营商；'
@@ -168,6 +171,9 @@ export default function SAMBind() {
           <div className="border-b border-gray-900/10 p-4 pb-12">
             <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-12">
 
+              {/*占位*/}
+              <div className="hidden sm:block sm:col-span-3"></div>
+
               <div className="sm:col-span-6">
                 <label htmlFor="student_id" className="block text-sm font-medium leading-6">
                   学号
@@ -183,7 +189,26 @@ export default function SAMBind() {
               </div>
 
               {/*占位*/}
-              <div className="hidden sm:block sm:col-span-6"></div>
+              <div className="hidden sm:block sm:col-span-3"></div>
+              <div className="hidden sm:block sm:col-span-3"></div>
+
+              <div className="sm:col-span-6">
+                <label htmlFor="student_id" className="block text-sm font-medium leading-6">
+                  姓名
+                </label>
+                <div className="mt-2 w-full">
+                  <input
+                    type="text"
+                    name="student_name"
+                    id="student_name"
+                    className="block w-full rounded-md border-0 py-1.5 shadow-sm bg-white/20 backdrop-blur ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 text-sm sm:leading-6"
+                  />
+                </div>
+              </div>
+
+              {/*占位*/}
+              <div className="hidden sm:block sm:col-span-3"></div>
+              <div className="hidden sm:block sm:col-span-3"></div>
 
               <div className="sm:col-span-6">
                 <label htmlFor="carrier" className="block text-sm font-medium leading-6">
@@ -203,7 +228,8 @@ export default function SAMBind() {
               </div>
 
               {/*占位*/}
-              <div className="hidden sm:block sm:col-span-6"></div>
+              <div className="hidden sm:block sm:col-span-3"></div>
+              <div className="hidden sm:block sm:col-span-3"></div>
 
               <div className="sm:col-span-6">
                 <label htmlFor="phone_number" className="block text-sm font-medium leading-6">
@@ -220,7 +246,8 @@ export default function SAMBind() {
               </div>
 
               {/*占位*/}
-              <div className="hidden sm:block sm:col-span-6"></div>
+              <div className="hidden sm:block sm:col-span-3"></div>
+              <div className="hidden sm:block sm:col-span-3"></div>
 
               <div className="sm:col-span-6">
                 <label htmlFor="code" className="block text-sm font-medium leading-6">
@@ -242,10 +269,14 @@ export default function SAMBind() {
                 </div>
               </div>
 
-              <div className="sm:col-span-full md:flex">
+              {/*占位*/}
+              <div className="hidden sm:block sm:col-span-3"></div>
+              <div className="hidden sm:block sm:col-span-3"></div>
+
+              <div className="col-span-full sm:col-span-6">
                 <button
                   type="submit"
-                  className="rounded-md bg-qlu w-full md:w-32 md:rounded-full px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                  className="rounded-md bg-qlu w-full sm:rounded-full  px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                   onClick={submit}
                 >
                   提交
